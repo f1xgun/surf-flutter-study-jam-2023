@@ -20,10 +20,11 @@ class _UrlBottomSheetState extends State<UrlBottomSheet> {
   }
 
   bool checkIsUrlValid(String url) {
-    if (url.endsWith(".pdf")) {
-      return true;
-    }
-    return false;
+    final data = url.toLowerCase();
+    final isValidUrl = Uri.tryParse(data)?.isAbsolute;
+    final hasHttps = data.startsWith("https://");
+    final hasPdf = data.endsWith(".pdf");
+    return isValidUrl == true && hasHttps && hasPdf;
   }
 
   void addUrl(BuildContext context, String url) async {
@@ -69,7 +70,7 @@ class _UrlBottomSheetState extends State<UrlBottomSheet> {
             if (value == null || value.isEmpty) {
               return 'Введите URL';
             }
-            if (!value.endsWith('.pdf')) {
+            if (!checkIsUrlValid(value)) {
               return 'Введите корректный URL';
             }
             return null;

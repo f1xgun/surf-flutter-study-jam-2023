@@ -25,4 +25,12 @@ class TicketService {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey("tickets")) prefs.remove("tickets");
   }
+
+  Future<void> updateTicket(Ticket ticket) async {
+    final prefs = await SharedPreferences.getInstance();
+    final tickets = await getTickets();
+    tickets.removeWhere((element) => element.url == ticket.url);
+    tickets.add(ticket);
+    await prefs.setString("tickets", json.encode(tickets));
+  }
 }

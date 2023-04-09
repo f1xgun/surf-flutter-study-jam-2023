@@ -11,6 +11,32 @@ import 'package:surf_flutter_study_jam_2023/models/ticket/ticket.dart';
 class TicketStoragePage extends StatelessWidget {
   const TicketStoragePage({Key? key}) : super(key: key);
 
+  void _showSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        content: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.1,
+          child: Row(
+            children: [
+              const Icon(Icons.info, color: Colors.white),
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                'Билет успешно добавлен',
+                style: AppTextStyle.medium14.value.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+        duration: const Duration(milliseconds: 1500),
+      ),
+    );
+  }
+
   void _showUrlBottomSheet(
       BuildContext context, TicketStoragePageModel model) async {
     String? result = await showModalBottomSheet(
@@ -25,32 +51,10 @@ class TicketStoragePage extends StatelessWidget {
             imageCodePoint: model
                 .iconsForTickets[Random().nextInt(model.iconsForTickets.length)]
                 .codePoint,
-            title: result,
-            url: result),
+            title: result.split('/').last.split('.').first,
+            url: result, isLoaded: false),
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: Row(
-              children: [
-                const Icon(Icons.info, color: Colors.white),
-                const SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  'Билет успешно добавлен',
-                  style: AppTextStyle.medium14.value.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          duration: const Duration(milliseconds: 1500),
-        ),
-      );
+      _showSnackBar(context);
     }
   }
 
