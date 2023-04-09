@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'ticket.g.dart';
 
 @JsonSerializable()
+/// Модель билета
 class Ticket {
   int imageCodePoint;
   String title;

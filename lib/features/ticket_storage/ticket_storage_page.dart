@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:surf_flutter_study_jam_2023/config/text_style.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ticket_storage_page_model.dart';
@@ -11,6 +10,7 @@ import 'package:surf_flutter_study_jam_2023/models/ticket/ticket.dart';
 class TicketStoragePage extends StatelessWidget {
   const TicketStoragePage({Key? key}) : super(key: key);
 
+  /// Показывает [SnackBar] в случае успешного добавления билета.
   void _showSnackBar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -37,6 +37,7 @@ class TicketStoragePage extends StatelessWidget {
     );
   }
 
+  /// Показывает [UrlBottomSheet] и добавляет билет в список.
   void _showUrlBottomSheet(
       BuildContext context, TicketStoragePageModel model) async {
     String? result = await showModalBottomSheet(
@@ -52,7 +53,8 @@ class TicketStoragePage extends StatelessWidget {
                 .iconsForTickets[Random().nextInt(model.iconsForTickets.length)]
                 .codePoint,
             title: result.split('/').last.split('.').first,
-            url: result, isLoaded: false),
+            url: result,
+            isLoaded: false),
       );
       _showSnackBar(context);
     }
@@ -98,7 +100,7 @@ class TicketStoragePage extends StatelessWidget {
             width: 125,
             child: FloatingActionButton(
               onPressed: model.clearTickets,
-              child: Text('Загрузить все', style: AppTextStyle.medium14.value),
+              child: Text('Очистить', style: AppTextStyle.medium14.value),
             ),
           ),
         ],

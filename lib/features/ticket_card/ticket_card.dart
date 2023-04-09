@@ -3,14 +3,13 @@ import 'package:surf_flutter_study_jam_2023/config/text_style.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ticket_storage_page_model.dart';
 import 'package:surf_flutter_study_jam_2023/models/ticket/ticket.dart';
 
+/// Карточка билета
 class TicketCard extends StatelessWidget {
   const TicketCard({super.key, required this.ticket});
 
   final Ticket ticket;
   @override
   Widget build(BuildContext context) {
-    final model = TicketStoragePageProvider.watch(context)!.notifier
-        as TicketStoragePageModel;
     return ListTile(
       isThreeLine: true,
       leading:
@@ -25,6 +24,7 @@ class TicketCard extends StatelessWidget {
   }
 }
 
+/// Подзаголовок карточки билета
 class TicketCardSubtitle extends StatelessWidget {
   const TicketCardSubtitle({super.key, required this.ticket});
   final Ticket ticket;
@@ -51,6 +51,7 @@ class TicketCardSubtitle extends StatelessWidget {
   }
 }
 
+/// Кнопка загрузки/паузы скачивания билета
 class TicketCardTrailing extends StatelessWidget {
   const TicketCardTrailing({super.key, required this.ticket});
   final Ticket ticket;

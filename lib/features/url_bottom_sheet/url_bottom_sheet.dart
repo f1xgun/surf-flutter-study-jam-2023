@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:surf_flutter_study_jam_2023/config/text_style.dart';
 
+/// Виджет для ввода ссылки на билет
 class UrlBottomSheet extends StatefulWidget {
   const UrlBottomSheet({super.key});
 
@@ -12,6 +13,7 @@ class UrlBottomSheet extends StatefulWidget {
 class _UrlBottomSheetState extends State<UrlBottomSheet> {
   final TextEditingController _controller = TextEditingController();
 
+  /// Проверяет буфер обмена на наличие ссылки на билет
   void checkClipboard() async {
     final content = await Clipboard.getData(Clipboard.kTextPlain);
     if (content?.text != null && content!.text!.endsWith(".pdf")) {
@@ -19,6 +21,7 @@ class _UrlBottomSheetState extends State<UrlBottomSheet> {
     }
   }
 
+  /// Проверяет валидность ссылки
   bool checkIsUrlValid(String url) {
     final data = url.toLowerCase();
     final isValidUrl = Uri.tryParse(data)?.isAbsolute;
@@ -27,6 +30,7 @@ class _UrlBottomSheetState extends State<UrlBottomSheet> {
     return isValidUrl == true && hasHttps && hasPdf;
   }
 
+  /// Добавляет ссылку на билет в список
   void addUrl(BuildContext context, String url) async {
     if (checkIsUrlValid(url)) {
       Navigator.pop(context, url);

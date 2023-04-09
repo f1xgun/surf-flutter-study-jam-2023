@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Перечисление стилей текста
+/// Перечисление стилей текста
 enum AppTextStyle {
   regular16(TextStyle(fontSize: 16, height: 1.40, color: Colors.black)),
   regular20(TextStyle(fontSize: 20, height: 1.40, color: Colors.black)),

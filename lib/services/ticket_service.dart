@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surf_flutter_study_jam_2023/models/ticket/ticket.dart';
 
+/// Сервис для работы с билетами
 class TicketService {
+
+  /// Получение списка билетов из SharedPreferences
   Future<List<Ticket>> getTickets() async {
     final prefs = await SharedPreferences.getInstance();
     List<Ticket> ticketsList = [];
@@ -14,6 +17,7 @@ class TicketService {
     return ticketsList;
   }
 
+  /// Добавление билета в SharedPreferences
   Future<void> addTickets(Ticket ticket) async {
     final prefs = await SharedPreferences.getInstance();
     final tickets = await getTickets();
@@ -21,11 +25,13 @@ class TicketService {
     await prefs.setString("tickets", json.encode(tickets));
   }
 
+  /// Удаление билета из SharedPreferences
   Future<void> clearTickets() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey("tickets")) prefs.remove("tickets");
   }
 
+  /// Обновление билета в SharedPreferences
   Future<void> updateTicket(Ticket ticket) async {
     final prefs = await SharedPreferences.getInstance();
     final tickets = await getTickets();

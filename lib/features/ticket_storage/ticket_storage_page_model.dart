@@ -21,6 +21,7 @@ class TicketStoragePageModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isDownload => _isDownload;
 
+  /// Начало скачивания билета
   void startNewDownload(Ticket ticket) {
     dl.addDownload(ticket.url, '/storage/emulated/0/Download');
     DownloadTask? task = dl.getDownload(ticket.url);
@@ -37,18 +38,21 @@ class TicketStoragePageModel extends ChangeNotifier {
     });
   }
 
+  /// Обновление прогресса загрузки
   void _updateTicketProgress(Ticket ticket, DownloadTask task) {
     ticket.downloadProgress = task.progress.value;
     _ticketService.updateTicket(ticket);
     notifyListeners();
   }
 
+  /// Добавление билета
   void addTicket(Ticket ticket) {
     _ticketService.addTickets(ticket);
     _tickets.add(ticket);
     notifyListeners();
   }
 
+  /// Загрузка билетов
   Future<void> fetchTickets() async {
     _isLoading = true;
     final tickets = await _ticketService.getTickets();
@@ -59,6 +63,7 @@ class TicketStoragePageModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Очистка билетов
   void clearTickets() {
     _tickets.clear();
     _ticketService.clearTickets();
