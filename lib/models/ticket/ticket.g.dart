@@ -7,13 +7,13 @@ part of 'ticket.dart';
 // **************************************************************************
 
 Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket(
-      image: json['image'] as String,
+      imageCodePoint: json['imageCodePoint'] as int,
       title: json['title'] as String,
       url: json['url'] as String,
     );
 
 Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
-      'image': instance.image,
+      'imageCodePoint': instance.imageCodePoint,
       'title': instance.title,
       'url': instance.url,
     };

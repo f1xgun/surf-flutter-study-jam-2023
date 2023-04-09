@@ -10,18 +10,16 @@ class TicketsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (tickets.isEmpty)
-          Center(
+    return Expanded(
+      child: tickets.isEmpty
+          ? Center(
               child: Text('Здесь пока ничего нет',
                   style: AppTextStyle.medium24.value))
-        else
-          ListView.builder(
-            itemCount: tickets.length,
-            itemBuilder: (context, index) => TicketCard(ticket: tickets[index]),
-          )
-      ],
+          : ListView.builder(
+              itemCount: tickets.length,
+              itemBuilder: (context, index) =>
+                  TicketCard(ticket: tickets[index]),
+            ),
     );
   }
 }

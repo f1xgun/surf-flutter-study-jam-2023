@@ -7,10 +7,9 @@ class TicketService {
     final prefs = await SharedPreferences.getInstance();
     List<Ticket> ticketsList = [];
     if (prefs.containsKey("tickets")) {
-      ticketsList = json
-          .decode(prefs.getString("tickets")!)
-          .map((ticket) => Ticket.fromJson(ticket))
-          .toList();
+      final ticketsListJson = json.decode(prefs.getString("tickets")!);
+      ticketsList = List<Ticket>.from(
+          ticketsListJson.map((ticket) => Ticket.fromJson(ticket)));
     }
     return ticketsList;
   }
@@ -20,5 +19,10 @@ class TicketService {
     final tickets = await getTickets();
     tickets.add(ticket);
     await prefs.setString("tickets", json.encode(tickets));
+  }
+
+  Future<void> clearTickets() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey("tickets")) prefs.remove("tickets");
   }
 }

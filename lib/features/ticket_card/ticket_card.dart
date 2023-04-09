@@ -8,8 +8,10 @@ class TicketCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(ticket.imageCodePoint);
     return ListTile(
-      leading: const Icon(Icons.flight),
+      leading:
+          Icon(IconData(ticket.imageCodePoint, fontFamily: 'MaterialIcons')),
       title: Text(ticket.title),
       trailing: const Icon(Icons.cloud_download_outlined),
     );
